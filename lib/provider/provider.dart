@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../service/auth_service.dart';
 import '../service/blog_service.dart';
 import '../modulw/module.dart';
 
@@ -13,7 +14,31 @@ class BlogProvider with ChangeNotifier {
 
   bool get isLoading => _isLoading;
 
+  User? _currentUser;
+
+  User? get currentUser => _currentUser;
+
   List<Blog> get savedBlogs => _blogs.where((blog) => blog.saved).toList();
+
+
+  Future<void> fetchCurrentUser() async {
+    try {
+      final username = await AuthService().getUsernameFromToken();
+      _currentUser = User(username: username, email: '', token: '');
+      notifyListeners();
+    } catch (e) {
+      print('Error fetching current user: $e');
+    }
+  }
+
+  bool isAuthor(String username) {
+    return _currentUser?.username == username;
+  }
+
+
+
+
+
 
   Future<void> fetchBlogs() async {
     _isLoading = true;

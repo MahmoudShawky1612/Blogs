@@ -106,43 +106,45 @@ class _SearchScreenState extends State<SearchScreen> {
                   blogProvider.toggleSaveBlog(blogProvider.blogs[i].id);
                 },
               ),
-              IconButton(
-                icon: Icon(Icons.edit),
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (ctx) => EditBlogScreen(blog: blogProvider.blogs[i]),
-                    ),
-                  );
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.delete),
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (ctx) => AlertDialog(
-                      title: Text('Confirm Deletion'),
-                      content: Text('Are you sure you want to delete this blog?'),
-                      actions: [
-                        TextButton(
-                          child: Text('Cancel'),
-                          onPressed: () {
-                            Navigator.of(ctx).pop();
-                          },
-                        ),
-                        TextButton(
-                          child: Text('Delete'),
-                          onPressed: () {
-                            blogProvider.removeBlog(blogProvider.blogs[i].id);
-                            Navigator.of(ctx).pop();
-                          },
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
+              if (blogProvider.isAuthor(blogProvider.blogs[i].username)) ...[
+                IconButton(
+                  icon: Icon(Icons.edit),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (ctx) => EditBlogScreen(blog: blogProvider.blogs[i]),
+                      ),
+                    );
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.delete),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (ctx) => AlertDialog(
+                        title: Text('Confirm Deletion'),
+                        content: Text('Are you sure you want to delete this blog?'),
+                        actions: [
+                          TextButton(
+                            child: Text('Cancel'),
+                            onPressed: () {
+                              Navigator.of(ctx).pop();
+                            },
+                          ),
+                          TextButton(
+                            child: Text('Delete'),
+                            onPressed: () {
+                              blogProvider.removeBlog(blogProvider.blogs[i].id);
+                              Navigator.of(ctx).pop();
+                            },
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ],
             ],
           ),
         ),
