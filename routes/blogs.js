@@ -5,11 +5,11 @@ const verifyToken = require('../middleware/verifyToken');
 const { createBlog, getBlogs, getSingleBlog, deleteBlog, patchBlog, getBlogByTitle,savedBlog,getSavedBlogs } = require('../controllers/blogs');
 
 
-router.route('/').post(createBlog).get(getBlogs);
+router.route('/').post(verifyToken,createBlog).get(verifyToken,getBlogs);
 
-router.route('/search').get(getBlogByTitle);
-router.route('/save/:blogID').patch(savedBlog);
-router.route('/saved').get(getSavedBlogs);
-router.route('/:blogID').get(getSingleBlog).delete(deleteBlog).patch(patchBlog);
+router.route('/search').get(verifyToken,getBlogByTitle);
+router.route('/save/:blogID').patch(verifyToken,savedBlog);
+router.route('/saved').get(verifyToken,getSavedBlogs);
+router.route('/:blogID').get(verifyToken,getSingleBlog).delete(verifyToken,deleteBlog).patch(verifyToken,patchBlog);
 
 module.exports = router;
