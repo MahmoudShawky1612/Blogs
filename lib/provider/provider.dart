@@ -94,7 +94,8 @@ class BlogProvider with ChangeNotifier {
     notifyListeners();
 
     try {
-      _blogs = await _blogService.searchBlogsByTitle(title);
+      final allBlogs = await _blogService.getBlogs(); // Fetch all blogs
+      _blogs = allBlogs.where((blog) => blog.title.toLowerCase().contains(title.toLowerCase())).toList(); // Filter blogs by title
     } catch (e) {
       print('Error searching blogs: $e');
     } finally {

@@ -33,25 +33,33 @@ class BlogService {
     }
   }
 
-  Future<List<Blog>> searchBlogsByTitle(String title) async {
-    final token = await authService.getToken();
-    if (token == null) {
-      throw Exception('No token found');
-    }
+  Future<List<Blog>> searchBlogsByTitle(String titlePattern) async {
+    try {
+      final token = await authService.getToken();
+      if (token == null || token.isEmpty) {
+        throw Exception('No token found');
+      }
 
-    final response = await http.get(
-      Uri.parse('$baseUrl/search?blogTitle=$title'),
-      headers: {'Authorization': 'Bearer $token'},
-    );
+      final response = await http.get(
+        Uri.parse('$baseUrl/search?blogTitle=$titlePattern'),
+        headers: {'Authorization': 'Bearer $token'},
+      );
 
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      final List<dynamic> json = data['data']['blogs'];
-      return json.map((blog) => Blog.fromJson(blog)).toList();
-    } else {
-      throw Exception('Failed to search blogs');
+      final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+
+      // Adjust success check
+      if (response.statusCode == 200 && jsonResponse['success'] == 'success') {
+        final List<dynamic> blogsJson = jsonResponse['data']['blogs'];
+        return blogsJson.map((json) => Blog.fromJson(json)).toList();
+      } else {
+        throw Exception(jsonResponse['message'] ?? 'Failed to search blogs');
+      }
+    } catch (e) {
+      print('Error searching blogs: $e');
+      throw Exception('Failed to search blogs: $e');
     }
   }
+
 
 
   Future<Blog> createBlog(String title, String description) async {

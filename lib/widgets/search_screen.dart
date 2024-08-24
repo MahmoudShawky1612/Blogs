@@ -12,12 +12,12 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   String _searchQuery = '';
-  bool _hasSearched = false; // Track if the user has performed a search
+  bool _hasSearched = false;
 
   void _searchBlogs() async {
     if (_searchQuery.isNotEmpty) {
       setState(() {
-        _hasSearched = true; // Indicate that a search has been performed
+        _hasSearched = true;
       });
 
       try {
@@ -29,7 +29,7 @@ class _SearchScreenState extends State<SearchScreen> {
       }
     } else {
       setState(() {
-        _hasSearched = false; // Reset search state if query is empty
+        _hasSearched = false;
       });
     }
   }
@@ -58,7 +58,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         _searchQuery = value;
                       });
                       if (_searchQuery.isNotEmpty) {
-                        _searchBlogs(); // Perform search on every change
+                        _searchBlogs();
                       }
                     },
                     onSubmitted: (value) => _searchBlogs(),
