@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const verifyToken = require('../middleware/verifyToken');
 
-const { createBlog, getBlogs, getSingleBlog, deleteBlog, patchBlog, getBlogByTitle,savedBlog,getSavedBlogs } = require('../controllers/blogs');
+const { createBlog, getBlogs, getSingleBlog, deleteBlog, patchBlog, getBlogByTitle,savedBlog,getSavedBlogs, } = require('../controllers/blogs');
 
 
 router.route('/').post(verifyToken,createBlog).get(verifyToken,getBlogs);

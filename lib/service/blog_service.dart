@@ -13,8 +13,34 @@ class BlogService {
       throw Exception('No token found');
     }
 
+    try {
+      final response = await http.get(
+        Uri.parse('$baseUrl?page=$page&limit=$limit'),
+        headers: {'Authorization': 'Bearer $token'},
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        final List<dynamic> json = data['data']['blogs'];
+        return json.map((blog) => Blog.fromJson(blog)).toList();
+      } else {
+        final errorResponse = jsonDecode(response.body);
+        throw Exception('Failed to load blogs: ${errorResponse['msg']}');
+      }
+    } catch (e) {
+      print('Error getting blogs: $e');
+      rethrow;
+    }
+  }
+
+  Future<List<Blog>> searchBlogsByTitle(String title) async {
+    final token = await authService.getToken();
+    if (token == null) {
+      throw Exception('No token found');
+    }
+
     final response = await http.get(
-      Uri.parse('$baseUrl?page=$page&limit=$limit'),
+      Uri.parse('$baseUrl/search?blogTitle=$title'),
       headers: {'Authorization': 'Bearer $token'},
     );
 
@@ -23,9 +49,10 @@ class BlogService {
       final List<dynamic> json = data['data']['blogs'];
       return json.map((blog) => Blog.fromJson(blog)).toList();
     } else {
-      throw Exception('Failed to load blogs');
+      throw Exception('Failed to search blogs');
     }
   }
+
 
   Future<Blog> createBlog(String title, String description) async {
     final token = await authService.getToken();
@@ -33,20 +60,26 @@ class BlogService {
       throw Exception('No token found');
     }
 
-    final response = await http.post(
-      Uri.parse(baseUrl),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token',
-      },
-      body: jsonEncode({'title': title, 'description': description}),
-    );
+    try {
+      final response = await http.post(
+        Uri.parse(baseUrl),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode({'title': title, 'description': description}),
+      );
 
-    if (response.statusCode == 201) {
-      final json = jsonDecode(response.body)['data'];
-      return Blog.fromJson(json);
-    } else {
-      throw Exception('Failed to create blog');
+      if (response.statusCode == 201) {
+        final json = jsonDecode(response.body)['data'];
+        return Blog.fromJson(json);
+      } else {
+        final errorResponse = jsonDecode(response.body);
+        throw Exception('Failed to create blog: ${errorResponse['msg']}');
+      }
+    } catch (e) {
+      print('Error creating blog: $e');
+      rethrow;
     }
   }
 
@@ -56,18 +89,24 @@ class BlogService {
       throw Exception('No token found');
     }
 
-    final response = await http.patch(
-      Uri.parse('$baseUrl/save/$blogID'),
-      headers: {
-        'Authorization': 'Bearer $token',
-      },
-    );
+    try {
+      final response = await http.patch(
+        Uri.parse('$baseUrl/save/$blogID'),
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
 
-    if (response.statusCode == 200) {
-      final json = jsonDecode(response.body)['data']['blog'];
-      return Blog.fromJson(json);
-    } else {
-      throw Exception('Failed to save blog');
+      if (response.statusCode == 200) {
+        final json = jsonDecode(response.body)['data']['blog'];
+        return Blog.fromJson(json);
+      } else {
+        final errorResponse = jsonDecode(response.body);
+        throw Exception('Failed to save blog: ${errorResponse['msg']}');
+      }
+    } catch (e) {
+      print('Error toggling save blog: $e');
+      rethrow;
     }
   }
 
@@ -77,15 +116,21 @@ class BlogService {
       throw Exception('No token found');
     }
 
-    final response = await http.delete(
-      Uri.parse('$baseUrl/$blogID'),
-      headers: {
-        'Authorization': 'Bearer $token',
-      },
-    );
+    try {
+      final response = await http.delete(
+        Uri.parse('$baseUrl/$blogID'),
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
 
-    if (response.statusCode != 200) {
-      throw Exception('Failed to delete blog');
+      if (response.statusCode != 200) {
+        final errorResponse = jsonDecode(response.body);
+        throw Exception('Failed to delete blog: ${errorResponse['msg']}');
+      }
+    } catch (e) {
+      print('Error deleting blog: $e');
+      rethrow;
     }
   }
 
@@ -95,20 +140,26 @@ class BlogService {
       throw Exception('No token found');
     }
 
-    final response = await http.patch(
-      Uri.parse('$baseUrl/$blogID'),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token',
-      },
-      body: jsonEncode({'title': title, 'description': description}),
-    );
+    try {
+      final response = await http.patch(
+        Uri.parse('$baseUrl/$blogID'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode({'title': title, 'description': description}),
+      );
 
-    if (response.statusCode == 200) {
-      final json = jsonDecode(response.body)['data']['blog'];
-      return Blog.fromJson(json);
-    } else {
-      throw Exception('Failed to edit blog');
+      if (response.statusCode == 200) {
+        final json = jsonDecode(response.body)['data']['blog'];
+        return Blog.fromJson(json);
+      } else {
+        final errorResponse = jsonDecode(response.body);
+        throw Exception('Failed to edit blog: ${errorResponse['msg']}');
+      }
+    } catch (e) {
+      print('Error editing blog: $e');
+      rethrow;
     }
   }
 
@@ -118,18 +169,24 @@ class BlogService {
       throw Exception('No token found');
     }
 
-    final response = await http.get(
-      Uri.parse('$baseUrl/saved'),
-      headers: {
-        'Authorization': 'Bearer $token',
-      },
-    );
+    try {
+      final response = await http.get(
+        Uri.parse('$baseUrl/saved'),
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
 
-    if (response.statusCode == 200) {
-      final List<dynamic> json = jsonDecode(response.body)['data']['blogs'];
-      return json.map((blog) => Blog.fromJson(blog)).toList();
-    } else {
-      throw Exception('Failed to load saved blogs');
+      if (response.statusCode == 200) {
+        final List<dynamic> json = jsonDecode(response.body)['data']['blogs'];
+        return json.map((blog) => Blog.fromJson(blog)).toList();
+      } else {
+        final errorResponse = jsonDecode(response.body);
+        throw Exception('Failed to load saved blogs: ${errorResponse['msg']}');
+      }
+    } catch (e) {
+      print('Error getting saved blogs: $e');
+      rethrow;
     }
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../modulw/module.dart';
 import '../service/blog_service.dart';
+import '../modulw/module.dart';
 
 class BlogProvider with ChangeNotifier {
   final BlogService _blogService;
@@ -10,6 +10,8 @@ class BlogProvider with ChangeNotifier {
   BlogProvider(this._blogService);
 
   List<Blog> get blogs => _blogs;
+
+  bool get isLoading => _isLoading;
 
   List<Blog> get savedBlogs => _blogs.where((blog) => blog.saved).toList();
 
@@ -86,4 +88,19 @@ class BlogProvider with ChangeNotifier {
       print('Error editing blog: $e');
     }
   }
+
+  Future<void> searchBlogsByTitle(String title) async {
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      _blogs = await _blogService.searchBlogsByTitle(title);
+    } catch (e) {
+      print('Error searching blogs: $e');
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
 }

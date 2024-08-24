@@ -6,6 +6,7 @@ import '../modulw/module.dart';
 import '../provider/provider.dart';
 import 'add_blog.dart';
 import 'edit_blog.dart';
+import 'search_screen.dart'; // Import the search screen
 
 class BlogListScreen extends StatefulWidget {
   @override
@@ -56,7 +57,19 @@ class _BlogListScreenState extends State<BlogListScreen> {
     final blogProvider = Provider.of<BlogProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text('Blogs')),
+      appBar: AppBar(
+        title: Text('Blogs'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (ctx) => SearchScreen()),
+              );
+            },
+          ),
+        ],
+      ),
       body: FutureBuilder(
         future: _fetchBlogsFuture,
         builder: (ctx, snapshot) {
@@ -73,6 +86,7 @@ class _BlogListScreenState extends State<BlogListScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(blogProvider.blogs[i].description),
+                    Text('By: ${blogProvider.blogs[i].username}'),
                     SizedBox(height: 4),
                     Text(
                       'Date: ${blogProvider.blogs[i].date.day}/${blogProvider.blogs[i].date.month} ${blogProvider.blogs[i].date.hour}:${blogProvider.blogs[i].date.minute.toString().padLeft(2, '0')}',
