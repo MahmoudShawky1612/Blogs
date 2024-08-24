@@ -1,0 +1,65 @@
+// class BlogListView extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     final blogProvider = Provider.of<BlogProvider>(context);
+//
+//     return FutureBuilder(
+//       future: blogProvider.fetchBlogs(),
+//       builder: (ctx, snapshot) {
+//         if (snapshot.connectionState == ConnectionState.waiting) {
+//           return Center(child: CircularProgressIndicator());
+//         } else if (snapshot.hasError) {
+//           return Center(child: Text('An error occurred: ${snapshot.error}'));
+//         } else {
+//           return ListView.builder(
+//             itemCount: blogProvider.blogs.length,
+//             itemBuilder: (ctx, i) => ListTile(
+//               title: Text(blogProvider.blogs[i].title),
+//               subtitle: Text(blogProvider.blogs[i].description),
+//               trailing: Row(
+//                 mainAxisSize: MainAxisSize.min,
+//                 children: [
+//                   IconButton(
+//                     icon: Icon(
+//                       blogProvider.blogs[i].saved ? Icons.bookmark : Icons.bookmark_border,
+//                     ),
+//                     onPressed: () {
+//                       blogProvider.toggleSaveBlog(blogProvider.blogs[i].id);
+//                     },
+//                   ),
+//                   IconButton(
+//                     icon: Icon(Icons.delete),
+//                     onPressed: () {
+//                       showDialog(
+//                         context: context,
+//                         builder: (ctx) => AlertDialog(
+//                           title: Text('Confirm Deletion'),
+//                           content: Text('Are you sure you want to delete this blog?'),
+//                           actions: [
+//                             TextButton(
+//                               child: Text('Cancel'),
+//                               onPressed: () {
+//                                 Navigator.of(ctx).pop();
+//                               },
+//                             ),
+//                             TextButton(
+//                               child: Text('Delete'),
+//                               onPressed: () {
+//                                 blogProvider.removeBlog(blogProvider.blogs[i].id);
+//                                 Navigator.of(ctx).pop();
+//                               },
+//                             ),
+//                           ],
+//                         ),
+//                       );
+//                     },
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           );
+//         }
+//       },
+//     );
+//   }
+// }
