@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-
-import '../../modulw/module.dart'; // Ensure this is the correct import for Blog class
 import '../../provider/provider.dart';
 import 'add_blog.dart';
 import 'blog_list.dart';
-import 'edit_blog.dart';
-import 'search_screen.dart'; // Import the search screen
+import 'floating_action_button.dart';
 
 class BlogListScreen extends StatefulWidget {
   @override
@@ -38,12 +36,9 @@ class _BlogListScreenState extends State<BlogListScreen> {
           }
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => AddBlogScreen()));
-        },
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: const FAB(),
+
     );
   }
 }

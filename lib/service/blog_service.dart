@@ -4,7 +4,7 @@ import '../modulw/module.dart';
 import 'auth_service.dart';
 
 class BlogService {
-  final String baseUrl = 'http://localhost:3000/api/v1/blogs'; // Update with your backend URL
+  final String baseUrl = 'http://192.168.1.112:3000/api/v1/blogs'; // Update with your backend URL
   final AuthService authService = AuthService();
 
   Future<List<Blog>> getBlogs({int page = 1, int limit = 10}) async {

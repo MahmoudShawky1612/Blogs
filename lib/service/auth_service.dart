@@ -6,7 +6,7 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import '../modulw/module.dart';
 
 class AuthService extends ChangeNotifier {
-  final String baseUrl = 'http://localhost:3000/api/v1'; // Update with your backend URL
+  final String baseUrl = 'http://192.168.1.112:3000/api/v1'; // Update with your backend URL
   final FlutterSecureStorage storage = FlutterSecureStorage();
 
   User? _user;

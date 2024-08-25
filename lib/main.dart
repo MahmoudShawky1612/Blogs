@@ -1,8 +1,6 @@
 import 'package:blog/widgets/Home.dart';
-import 'package:blog/widgets/views/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'service/auth_service.dart';
 import 'service/blog_service.dart';
 import 'provider/provider.dart';
@@ -25,9 +23,9 @@ class MyApp extends StatelessWidget {
           create: (context) => BlogProvider(BlogService()),
         ),
       ],
-      child:  MaterialApp(
+      child:  const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: SignInScreen(),
+        home: HomeScreen(),
       ),
     );
   }
