@@ -25,7 +25,8 @@ class MyApp extends StatelessWidget {
           create: (context) => BlogProvider(BlogService()),
         ),
       ],
-      child: MaterialApp(
+      child:  MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: SignInScreen(),
       ),
     );

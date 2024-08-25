@@ -1,11 +1,10 @@
-
-import 'package:blog/widgets/Home.dart';
 import 'package:blog/widgets/views/signup.dart';
-import 'package:blog/widgets/views/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../service/auth_service.dart';
+import '../Home.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 
 
 class SignInScreen extends StatefulWidget {
@@ -46,36 +45,110 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Sign In')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
-            ),
-            TextField(
-              controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
-              obscureText: true,
-            ),
-            SizedBox(height: 20),
-            _isLoading
-                ? CircularProgressIndicator()
-                : ElevatedButton(
-              onPressed: _signIn,
-              child: Text('Sign In'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => SignUpScreen()),
-                );
-              },
-              child: Text('Don\'t have an account? Sign Up'),
-            ),
-          ],
+      resizeToAvoidBottomInset: false,
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFFE17888), // #E17888
+              Color(0xFFAE3B8B), // #AE3B8B
+              Color(0xFF1C5789), // #1C5789
+              Color(0xFF341514),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+               Text("Welcome to Loot", style: GoogleFonts.lobster(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 55,
+          ),),
+              const SizedBox(height: 30,),
+              TextField(
+                controller: _emailController,
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  filled: false,
+                  fillColor: Colors.white.withOpacity(0.8),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: const BorderSide(
+                      color: Colors.grey,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 30),
+              TextField(
+                controller: _passwordController,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  filled: false,
+                  fillColor: Colors.white.withOpacity(0.8),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    // Set the border radius here
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20), // Set the border radius here
+                    borderSide: const BorderSide(
+                      color: Colors.grey, // No border color when enabled
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12), // Set the border radius here
+                    borderSide: const BorderSide(
+                      color: Colors.white, // Border color when focused
+                    ),
+                  ),
+                ),
+                obscureText: true,
+              ),
+
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => SignUpScreen()),
+                  );
+                },
+                child: const Text('Don\'t have an account? Sign Up',style: TextStyle(color: Colors.white),),
+              ),
+
+                const SizedBox(height: 20),
+              _isLoading
+                  ? const CircularProgressIndicator()
+                  :  SizedBox(
+                      width: 200,
+                    child: ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(Color(0xFF1C5789)),
+                              elevation: MaterialStateProperty.all(20),
+                            ),
+                            onPressed: _signIn,
+                            child:  Text('Sign In',style: GoogleFonts.lobster(color: Colors.white,
+                              fontWeight: FontWeight.bold,
+
+                            ),),
+                                  ),
+                  ),
+
+            ],
+          ),
         ),
       ),
     );
