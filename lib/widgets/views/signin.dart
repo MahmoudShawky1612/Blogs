@@ -1,9 +1,11 @@
-import 'package:blog/widgets/signup.dart';
-import 'package:blog/widgets/ui.dart';
+
+import 'package:blog/widgets/Home.dart';
+import 'package:blog/widgets/views/signup.dart';
+import 'package:blog/widgets/views/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../service/auth_service.dart';
+import '../../service/auth_service.dart';
 
 
 class SignInScreen extends StatefulWidget {
@@ -28,7 +30,7 @@ class _SignInScreenState extends State<SignInScreen> {
         _passwordController.text.trim(),
       );
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => BlogListScreen()),
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
       );
     } catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(

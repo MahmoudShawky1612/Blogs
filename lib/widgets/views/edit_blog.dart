@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/provider.dart';
-import '../modulw/module.dart';
+import '../../provider/provider.dart';
+import '../../modulw/module.dart';
 
 class EditBlogScreen extends StatefulWidget {
   final Blog blog;
@@ -61,19 +61,19 @@ class _EditBlogScreenState extends State<EditBlogScreen> {
           children: [
             TextField(
               controller: _titleController,
-              decoration: InputDecoration(labelText: 'Title'),
+              decoration: const InputDecoration(labelText: 'Title'),
             ),
             TextField(
               controller: _descriptionController,
-              decoration: InputDecoration(labelText: 'Description'),
+              decoration: const InputDecoration(labelText: 'Description'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             if (_isLoading)
-              CircularProgressIndicator()
+              const CircularProgressIndicator()
             else
               ElevatedButton(
                 onPressed: _submit,
-                child: Text('Save'),
+                child: const Text('Save'),
               ),
           ],
         ),

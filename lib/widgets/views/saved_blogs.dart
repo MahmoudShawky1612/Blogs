@@ -1,6 +1,7 @@
+import 'package:blog/widgets/views/blog_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../provider/provider.dart';
+import '../../provider/provider.dart';
 
 class SavedBlogsScreen extends StatefulWidget {
   @override
@@ -21,36 +22,23 @@ class _SavedBlogsScreenState extends State<SavedBlogsScreen> {
     final blogProvider = Provider.of<BlogProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text('Saved Blogs')),
+      appBar: AppBar(
+          title: const Text('Saved Blogs')),
       body: FutureBuilder(
         future: _fetchSavedBlogsFuture,
         builder: (ctx, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('An error occurred: ${snapshot.error}'));
           } else {
             final savedBlogs = blogProvider.savedBlogs;
 
             if (savedBlogs.isEmpty) {
-              return Center(child: Text('No saved blogs found.'));
+              return const Center(child: Text('No saved blogs found.'));
             }
 
-            return ListView.builder(
-              itemCount: savedBlogs.length,
-              itemBuilder: (ctx, i) => ListTile(
-                title: Text(savedBlogs[i].title),
-                subtitle: Text(savedBlogs[i].description),
-                trailing: IconButton(
-                  icon: Icon(
-                    savedBlogs[i].saved ? Icons.bookmark : Icons.bookmark_border,
-                  ),
-                  onPressed: () {
-                    blogProvider.toggleSaveBlog(savedBlogs[i].id);
-                  },
-                ),
-              ),
-            );
+            return const BlogList();
           }
         },
       ),
