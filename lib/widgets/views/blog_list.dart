@@ -41,6 +41,7 @@ class _BlogListState extends State<BlogList> {
     final blogProvider = Provider.of<BlogProvider>(context);
 
     return ListView.builder(
+      physics: BouncingScrollPhysics(),
       itemCount: blogProvider.blogs.length,
       itemBuilder: (ctx, i) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 8.0), // Add padding between blog cards

@@ -31,9 +31,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       appBar: const CustomAppBar(),
-      bottomNavigationBar:BottomNavBar(selectedIndex: selectedIndex,onItemTapped:_onNavBarTapped),
       body: selectedIndex == 0 ? BlogListScreen() : SavedBlogsScreen(),
+      bottomNavigationBar:BottomNavBar(selectedIndex: selectedIndex,onItemTapped:_onNavBarTapped),
     );
   }
 }
