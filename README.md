@@ -48,8 +48,6 @@ This project is a **Blog Application** built using **Flutter** as a front-end am
 
    ### Installation For NodeJs
 
-1. **Clone the repository**:
-   ```
 2. **Navigate to the project directory**:
    ```sh
    cd blog
@@ -58,11 +56,7 @@ This project is a **Blog Application** built using **Flutter** as a front-end am
    ```sh
    npm i
    npm run start
-   ```
-4. **Run the application**:
-   ```sh
-   flutter run
-   ```
+   
    
 
 ### Usage
