@@ -1,8 +1,7 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 import '../../provider/provider.dart';
 
 class AddBlogScreen extends StatelessWidget {
@@ -16,29 +15,103 @@ class AddBlogScreen extends StatelessWidget {
     final blogProvider = Provider.of<BlogProvider>(context, listen: false);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Add Blog')),
+      appBar: AppBar(
+        leading: IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.arrow_back_ios_new,color: Color(0xFFDD671E),)),
+      backgroundColor: Color(0xFF144058),
+      ),
+      backgroundColor: const Color(0xFF144058),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
               controller: _titleController,
-              decoration: const InputDecoration(labelText: 'Title'),
+              decoration: InputDecoration(
+                labelText: 'Title',
+                labelStyle: GoogleFonts.lobster(
+                  color: const Color(0xFFDD671E),
+                  fontSize: 13,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: const BorderSide(
+                    color: Color(0xFFDD671E), // Border color
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: const BorderSide(
+                    color: Color(0xFFE58D2E), // Border color when enabled
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: const BorderSide(
+                    color: Color(0xFFDD671E), // Border color when focused
+                  ),
+                ),
+              ),
             ),
+            const SizedBox(height: 30),
             TextField(
               controller: _descriptionController,
-              decoration: const InputDecoration(labelText: 'Description'),
+              decoration: InputDecoration(
+                labelText: 'Description',
+                labelStyle: GoogleFonts.lobster(
+                  color: const Color(0xFFDD671E),
+                  fontSize: 13,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: const BorderSide(
+                    color: Color(0xFFDD671E), // Border color
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: const BorderSide(
+                    color: Color(0xFFE58D2E), // Border color when enabled
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: const BorderSide(
+                    color: Color(0xFFDD671E), // Border color when focused
+                  ),
+                ),
+              ),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFFDD671E), // Use the same color scheme
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
               onPressed: () async {
+                if (_titleController.text.isEmpty || _descriptionController.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Please fill in all fields'),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                  return;
+                }
                 await blogProvider.addBlog(
                   _titleController.text,
                   _descriptionController.text,
                 );
                 Navigator.of(context).pop();
               },
-              child: const Text('Add Blog'),
+              child: Text(
+                'Add Blog',
+                style: GoogleFonts.lobster(
+                  color: const Color(0xFF4D181C),
+                ),
+              ),
             ),
           ],
         ),

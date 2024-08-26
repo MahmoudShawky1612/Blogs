@@ -1,11 +1,14 @@
+import 'package:blog/widgets/Home.dart';
 import 'package:blog/widgets/views/blog_list.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../provider/provider.dart';
-import 'edit_blog.dart';
 import 'search_bar.dart' as custom; // Use an alias for the custom SearchBar
 
 class SearchScreen extends StatefulWidget {
+  const SearchScreen({super.key});
+
   @override
   _SearchScreenState createState() => _SearchScreenState();
 }
@@ -35,14 +38,31 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   @override
+  void dispose() {
+    // Reset the blog list to show all blogs when navigating back
+    Provider.of<BlogProvider>(context, listen: false).fetchBlogs();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final blogProvider = Provider.of<BlogProvider>(context);
 
     return Scaffold(
+      backgroundColor: const Color(0xFF144058),
       appBar: AppBar(
-        title: const Text('Search Blogs'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_rounded),
+          color: const Color(0xFFDD671E),
+            onPressed: () {
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (ctx) => const HomeScreen()),(_)=>false,
+              );
+            }
+        ),
+        backgroundColor: const Color(0xFF144058),
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(56.0),
+          preferredSize: const Size.fromHeight(70.0),
           child: custom.SearchBar( // Use the alias here
             onSearch: _searchBlogs,
             onQueryChanged: (value) {
@@ -59,10 +79,17 @@ class _SearchScreenState extends State<SearchScreen> {
       body: blogProvider.isLoading
           ? const Center(child: CircularProgressIndicator())
           : !_hasSearched
-          ? const Center(child: Text('Enter a query to search'))
+          ?  Center(child: Text('Enter a query to search',style: GoogleFonts.lobster(
+          color: const Color(0xFFDD671E)
+      ),))
           : blogProvider.blogs.isEmpty
-          ? const Center(child: Text('No blogs match your search criteria'))
-          : const BlogList(),
+          ?  Center(child: Text('No blogs match your search criteria',style: GoogleFonts.lobster(
+          color: const Color(0xFFDD671E)
+      ),))
+          : const Padding(
+        padding: EdgeInsets.all(10.0),
+        child: BlogList(),
+      ),
     );
   }
 }

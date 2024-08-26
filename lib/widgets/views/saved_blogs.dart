@@ -1,5 +1,6 @@
 import 'package:blog/widgets/views/blog_list.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../provider/provider.dart';
 
@@ -22,8 +23,6 @@ class _SavedBlogsScreenState extends State<SavedBlogsScreen> {
     final blogProvider = Provider.of<BlogProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(
-          title: const Text('Saved Blogs')),
       body: FutureBuilder(
         future: _fetchSavedBlogsFuture,
         builder: (ctx, snapshot) {
@@ -35,7 +34,11 @@ class _SavedBlogsScreenState extends State<SavedBlogsScreen> {
             final savedBlogs = blogProvider.savedBlogs;
 
             if (savedBlogs.isEmpty) {
-              return const Center(child: Text('No saved blogs found.'));
+              return  Center(child: Text('No saved blogs found.',
+              style: GoogleFonts.lobster(
+                color: Color(0xFFDD671E)
+              ),
+              ));
             }
 
             return const BlogList();

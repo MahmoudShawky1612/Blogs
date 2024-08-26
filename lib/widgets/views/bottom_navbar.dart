@@ -18,7 +18,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       padding: const EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
-          color: Color(0xFFDD671E),
+          color: const Color(0xFFDD671E),
           borderRadius: BorderRadius.circular(30),
           boxShadow: const [
             BoxShadow(

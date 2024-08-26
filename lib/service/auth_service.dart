@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:jwt_decoder/jwt_decoder.dart';
-import '../modulw/module.dart';
+import '../model/blog_user_model.dart';
 
 class AuthService extends ChangeNotifier {
   final String baseUrl = 'http://192.168.1.112:3000/api/v1'; // Update with your backend URL
-  final FlutterSecureStorage storage = FlutterSecureStorage();
+  final FlutterSecureStorage storage = const FlutterSecureStorage();
 
   User? _user;
 

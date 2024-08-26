@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+import '../../model/blog_user_model.dart';
 import '../../provider/provider.dart';
-import '../../modulw/module.dart';
 
 class EditBlogScreen extends StatefulWidget {
   final Blog blog;
@@ -30,6 +31,12 @@ class _EditBlogScreenState extends State<EditBlogScreen> {
     final description = _descriptionController.text;
 
     if (title.isEmpty || description.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please fill in all fields'),
+          backgroundColor: Colors.red,
+        ),
+      );
       return;
     }
 
@@ -50,30 +57,99 @@ class _EditBlogScreenState extends State<EditBlogScreen> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Edit Blog')),
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_ios_new, color: Color(0xFFDD671E)),
+        ),
+        backgroundColor: Color(0xFF144058),
+      ),
+      backgroundColor: const Color(0xFF144058),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
               controller: _titleController,
-              decoration: const InputDecoration(labelText: 'Title'),
+              decoration: InputDecoration(
+                labelText: 'Title',
+                labelStyle: GoogleFonts.lobster(
+                  color: const Color(0xFFDD671E),
+                  fontSize: 13,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: const BorderSide(
+                    color: Color(0xFFDD671E), // Border color
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: const BorderSide(
+                    color: Color(0xFFE58D2E), // Border color when enabled
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: const BorderSide(
+                    color: Color(0xFFDD671E), // Border color when focused
+                  ),
+                ),
+              ),
             ),
+            const SizedBox(height: 30),
             TextField(
               controller: _descriptionController,
-              decoration: const InputDecoration(labelText: 'Description'),
+              decoration: InputDecoration(
+                labelText: 'Description',
+                labelStyle: GoogleFonts.lobster(
+                  color: const Color(0xFFDD671E),
+                  fontSize: 13,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: const BorderSide(
+                    color: Color(0xFFDD671E), // Border color
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: const BorderSide(
+                    color: Color(0xFFE58D2E), // Border color when enabled
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: const BorderSide(
+                    color: Color(0xFFDD671E), // Border color when focused
+                  ),
+                ),
+              ),
             ),
             const SizedBox(height: 20),
             if (_isLoading)
               const CircularProgressIndicator()
             else
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFDD671E), // Use the same color scheme
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
                 onPressed: _submit,
-                child: const Text('Save'),
+                child: Text(
+                  'Save',
+                  style: GoogleFonts.lobster(
+                    color: const Color(0xFF4D181C),
+                  ),
+                ),
               ),
           ],
         ),

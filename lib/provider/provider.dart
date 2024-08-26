@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import '../model/blog_user_model.dart';
 import '../service/auth_service.dart';
 import '../service/blog_service.dart';
-import '../modulw/module.dart';
 
 class BlogProvider with ChangeNotifier {
   final BlogService _blogService;

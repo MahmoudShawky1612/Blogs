@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SearchBar extends StatelessWidget {
   final Function(String) onSearch;
@@ -13,22 +15,39 @@ class SearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(top: 30,left: 25,right: 25),
       child: Row(
         children: [
           Expanded(
             child: TextField(
-              decoration: const InputDecoration(
+              decoration:  InputDecoration(
                 labelText: 'Search by title',
-                border: OutlineInputBorder(),
+                labelStyle: GoogleFonts.lobster(
+                  color: Color(0xFFDD671E),
+                  fontSize: 13
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: const BorderSide(
+                    color: Color(0xFFDD671E), // Border color
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: const BorderSide(
+                    color: Color(0xFFE58D2E), // Border color when enabled
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: const BorderSide(
+                    color: Color(0xFFDD671E), // Border color when focused
+                  ),
+                ),
               ),
               onChanged: onQueryChanged,
               onSubmitted: onSearch,
             ),
-          ),
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () => onSearch(''),
           ),
         ],
       ),

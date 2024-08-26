@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../modulw/module.dart';
+import '../model/blog_user_model.dart';
 import 'auth_service.dart';
 
 class BlogService {
   final String baseUrl = 'http://192.168.1.112:3000/api/v1/blogs'; // Update with your backend URL
   final AuthService authService = AuthService();
 
-  Future<List<Blog>> getBlogs({int page = 1, int limit = 10}) async {
+  Future<List<Blog>> getBlogs() async {
     final token = await authService.getToken();
     if (token == null) {
       throw Exception('No token found');
@@ -15,7 +15,7 @@ class BlogService {
 
     try {
       final response = await http.get(
-        Uri.parse('$baseUrl?page=$page&limit=$limit'),
+        Uri.parse(baseUrl),
         headers: {'Authorization': 'Bearer $token'},
       );
 
