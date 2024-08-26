@@ -53,10 +53,10 @@ This project is a **Blog Application** built using **Flutter** as a front-end am
    ```sh
    cd blog
    ```
-3. **Start the server**:
+3. **Install packages ad Start the server**:
    ```sh
-   npm run start
-   
+   npm install
+   nondemon
    
 
 ### Usage
