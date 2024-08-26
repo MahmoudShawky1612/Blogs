@@ -2,6 +2,7 @@ import 'package:blog/widgets/views/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../service/auth_service.dart';
+import '../../utils/dimensions.dart';
 import '../Home.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -44,6 +45,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print("height"+MediaQuery.of(context).size.height.toString());
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -60,16 +62,16 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding:  EdgeInsets.all(Dimensions.sixteen),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
                Text("Welcome to Loot", style: GoogleFonts.lobster(
             color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 55,
+            fontSize: Dimensions.fiftyFive,
           ),),
-              const SizedBox(height: 30,),
+               SizedBox(height: Dimensions.thirty,),
               TextField(
                 controller: _emailController,
                 decoration: InputDecoration(
@@ -93,7 +95,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 30),
+               SizedBox(height: Dimensions.thirty),
               TextField(
                 controller: _passwordController,
                 decoration: InputDecoration(
@@ -129,14 +131,14 @@ class _SignInScreenState extends State<SignInScreen> {
                 child: const Text('Don\'t have an account? Sign Up',style: TextStyle(color: Colors.white),),
               ),
 
-                const SizedBox(height: 20),
+                 SizedBox(height: Dimensions.twenty),
               _isLoading
                   ? const CircularProgressIndicator()
                   :  SizedBox(
-                      width: 200,
+                      width: Dimensions.twoHundred,
                     child: ElevatedButton(
                             style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(Color(0xFF1C5789)),
+                              backgroundColor: MaterialStateProperty.all(const Color(0xFF1C5789)),
                               elevation: MaterialStateProperty.all(20),
                             ),
                             onPressed: _signIn,

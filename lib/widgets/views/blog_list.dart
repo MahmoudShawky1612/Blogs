@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../model/blog_user_model.dart';
 import '../../provider/provider.dart';
+import '../../utils/dimensions.dart';
 import 'delete_confirm_dialog.dart';
 import 'edit_blog.dart';
 
@@ -44,7 +45,7 @@ class _BlogListState extends State<BlogList> {
       physics: BouncingScrollPhysics(),
       itemCount: blogProvider.blogs.length,
       itemBuilder: (ctx, i) => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 8.0), // Add padding between blog cards
+        padding:  EdgeInsets.symmetric(vertical: Dimensions.thirty, horizontal: Dimensions.eight), // Add padding between blog cards
         child: Stack(
           clipBehavior: Clip.none,
           children: [
@@ -67,7 +68,7 @@ class _BlogListState extends State<BlogList> {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding:  EdgeInsets.all(Dimensions.sixteen),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -77,7 +78,7 @@ class _BlogListState extends State<BlogList> {
                           Text(
                             '${blogProvider.blogs[i].date.day}/${blogProvider.blogs[i].date.month} ${blogProvider.blogs[i].date.hour}:${blogProvider.blogs[i].date.minute.toString().padLeft(2, '0')}',
                             style: GoogleFonts.openSans(
-                              fontSize: 12,
+                              fontSize: Dimensions.twelve,
                               color: const Color(0xFFDD671E),
                             ),
                           ),
@@ -95,11 +96,11 @@ class _BlogListState extends State<BlogList> {
                               ),
                               if (blogProvider.isAuthor(blogProvider.blogs[i].username)) ...[
                                 IconButton(
-                                  icon: const Icon(Icons.edit, color: Color(0xFFDD671E),size: 17,),
+                                  icon: Icon(Icons.edit, color: Color(0xFFDD671E),size: Dimensions.sevenTeen,),
                                   onPressed: () => _editBlog(blogProvider.blogs[i]),
                                 ),
                                 IconButton(
-                                  icon: const Icon(Icons.delete, color: Color(0xFFDD671E), size: 17),
+                                  icon:  Icon(Icons.delete, color: Color(0xFFDD671E), size: Dimensions.sevenTeen),
                                   onPressed: () {
                                     showDialog(
                                       context: context,
@@ -120,16 +121,16 @@ class _BlogListState extends State<BlogList> {
                       Text(
                         blogProvider.blogs[i].title,
                         style: GoogleFonts.lobster(
-                          fontSize: 24,
+                          fontSize: Dimensions.twentyFour,
                           fontWeight: FontWeight.bold,
                           color: const Color(0xFFE58D2E),
                         ),
                       ),
-                      const SizedBox(height: 8),
+                       SizedBox(height: Dimensions.eight),
                       Text(
                         blogProvider.blogs[i].description,
                         style: GoogleFonts.openSans(
-                          fontSize: 16,
+                          fontSize: Dimensions.sixteen,
                           color: const Color(0xFFDD671E),
                         ),
                       ),
@@ -139,12 +140,12 @@ class _BlogListState extends State<BlogList> {
               ),
             ),
             Positioned(
-              top: -20,
-              left: 16,
+              top: -Dimensions.twenty,
+              left: Dimensions.sixteen,
               child: Column(
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    padding:  EdgeInsets.symmetric(horizontal: Dimensions.twelve, vertical: Dimensions.five),
                     decoration: BoxDecoration(
                       color: const Color(0xFFDD671E),
                       borderRadius: BorderRadius.circular(12),
@@ -161,14 +162,14 @@ class _BlogListState extends State<BlogList> {
                       blogProvider.isAuthor(blogProvider.blogs[i].username)?
                       "You":blogProvider.blogs[i].username ,
                       style: GoogleFonts.lobsterTwo(
-                        fontSize: 14,
+                        fontSize: Dimensions.fourTeen,
                         color: const Color(0xFF144058),
                       ),
                     ),
                   ),
                   Container(
-                    width: 8,
-                    height: 8,
+                    width: Dimensions.eight,
+                    height: Dimensions.eight,
                     decoration: const BoxDecoration(
                       color: Color(0xFFE58D2E),
                       shape: BoxShape.circle,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../utils/dimensions.dart';
+
 class LogoutConfirmationDialog extends StatelessWidget {
   final VoidCallback onLogout;
 
@@ -14,27 +16,27 @@ class LogoutConfirmationDialog extends StatelessWidget {
       ),
       backgroundColor: const Color(0xFF144058),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding:   EdgeInsets.all(Dimensions.sixteen),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               'Confirm Logout',
               style: GoogleFonts.lobster(
-                fontSize: 20,
+                fontSize: Dimensions.twenty,
                 color: const Color(0xFFDD671E),
               ),
             ),
-            const SizedBox(height: 16),
+              SizedBox(height: Dimensions.sixteen),
             Text(
               'Are you sure you want to logout?',
               style: GoogleFonts.openSans(
-                fontSize: 16,
+                fontSize: Dimensions.sixteen,
                 color: Colors.white,
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 20),
+              SizedBox(height: Dimensions.twenty),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

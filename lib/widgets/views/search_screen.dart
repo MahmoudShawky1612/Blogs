@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../provider/provider.dart';
+import '../../utils/dimensions.dart';
 import 'search_bar.dart' as custom; // Use an alias for the custom SearchBar
 
 class SearchScreen extends StatefulWidget {
@@ -39,7 +40,6 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   void dispose() {
-    // Reset the blog list to show all blogs when navigating back
     Provider.of<BlogProvider>(context, listen: false).fetchBlogs();
     super.dispose();
   }
@@ -62,7 +62,7 @@ class _SearchScreenState extends State<SearchScreen> {
         ),
         backgroundColor: const Color(0xFF144058),
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(70.0),
+          preferredSize: Size.fromHeight(Dimensions.seventy),
           child: custom.SearchBar( // Use the alias here
             onSearch: _searchBlogs,
             onQueryChanged: (value) {

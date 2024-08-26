@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../utils/dimensions.dart';
+
 class BottomNavBar extends StatefulWidget {
   final int selectedIndex;
   final Function(int) onItemTapped;
@@ -17,9 +19,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return Stack(
       children: [
         Positioned(
-          bottom: 20, // Adjusts the floating height
-          left: 16,
-          right: 16,
+          bottom: Dimensions.twenty, // Adjusts the floating height
+          left: Dimensions.sixteen,
+          right: Dimensions.sixteen,
           child: Container(
             decoration: BoxDecoration(
               color: const Color(0xFFDD671E),

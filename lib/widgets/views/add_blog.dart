@@ -1,3 +1,4 @@
+import 'package:blog/utils/dimensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,12 +17,12 @@ class AddBlogScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.arrow_back_ios_new,color: Color(0xFFDD671E),)),
+        leading: IconButton(onPressed: (){Navigator.pop(context);}, icon: const Icon(Icons.arrow_back_ios_new,color: Color(0xFFDD671E),)),
       backgroundColor: Color(0xFF144058),
       ),
       backgroundColor: const Color(0xFF144058),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding:  EdgeInsets.all(Dimensions.sixteen),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -31,7 +32,7 @@ class AddBlogScreen extends StatelessWidget {
                 labelText: 'Title',
                 labelStyle: GoogleFonts.lobster(
                   color: const Color(0xFFDD671E),
-                  fontSize: 13,
+                  fontSize: Dimensions.thirTeen,
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
@@ -53,14 +54,14 @@ class AddBlogScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 30),
+             SizedBox(height: Dimensions.thirty),
             TextField(
               controller: _descriptionController,
               decoration: InputDecoration(
                 labelText: 'Description',
                 labelStyle: GoogleFonts.lobster(
                   color: const Color(0xFFDD671E),
-                  fontSize: 13,
+                  fontSize: Dimensions.thirTeen,
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
@@ -82,7 +83,7 @@ class AddBlogScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+             SizedBox(height: Dimensions.twenty),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFDD671E), // Use the same color scheme

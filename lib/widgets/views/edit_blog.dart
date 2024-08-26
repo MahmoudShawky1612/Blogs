@@ -1,3 +1,4 @@
+import 'package:blog/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -49,7 +50,11 @@ class _EditBlogScreenState extends State<EditBlogScreen> {
           .editBlog(widget.blog.id, title, description);
       Navigator.of(context).pop(true); // Pass true to indicate changes were made
     } catch (error) {
-      // Handle error (show a snackbar or dialog)
+       ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Please fill in all fields'),
+            backgroundColor: Colors.red,
+          ));
     } finally {
       setState(() {
         _isLoading = false;
@@ -65,13 +70,13 @@ class _EditBlogScreenState extends State<EditBlogScreen> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back_ios_new, color: Color(0xFFDD671E)),
+          icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFFDD671E)),
         ),
-        backgroundColor: Color(0xFF144058),
+        backgroundColor: const Color(0xFF144058),
       ),
       backgroundColor: const Color(0xFF144058),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding:  EdgeInsets.all(Dimensions.sixteen),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -81,7 +86,7 @@ class _EditBlogScreenState extends State<EditBlogScreen> {
                 labelText: 'Title',
                 labelStyle: GoogleFonts.lobster(
                   color: const Color(0xFFDD671E),
-                  fontSize: 13,
+                  fontSize: Dimensions.thirTeen,
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
@@ -103,14 +108,14 @@ class _EditBlogScreenState extends State<EditBlogScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 30),
+             SizedBox(height: Dimensions.thirty),
             TextField(
               controller: _descriptionController,
               decoration: InputDecoration(
                 labelText: 'Description',
                 labelStyle: GoogleFonts.lobster(
                   color: const Color(0xFFDD671E),
-                  fontSize: 13,
+                  fontSize: Dimensions.thirTeen,
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
@@ -132,7 +137,7 @@ class _EditBlogScreenState extends State<EditBlogScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+              SizedBox(height: Dimensions.twenty),
             if (_isLoading)
               const CircularProgressIndicator()
             else

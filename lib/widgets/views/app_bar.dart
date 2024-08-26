@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../provider/provider.dart';
 import '../../service/auth_service.dart';
+import '../../utils/dimensions.dart';
 import 'logout_confirm_dialog.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
@@ -65,10 +66,10 @@ class _CustomAppBarState extends State<CustomAppBar> {
             backgroundColor: Colors.transparent, // Make AppBar background transparent
             title: Row(
               children: [
-                const Icon(Icons.circle, color: Colors.green, size: 10),
-                const SizedBox(width: 5),
-                const Icon(Icons.person, size: 27, color: Color(0xFF144058)),
-                const SizedBox(width: 5),
+                 Icon(Icons.circle, color: Colors.green, size: Dimensions.ten),
+                 SizedBox(width: Dimensions.five),
+                 Icon(Icons.person, size: Dimensions.twentySeven, color: const Color(0xFF144058)),
+                 SizedBox(width: Dimensions.five),
                 Text(
                   blogProvider.currentUser?.username ?? '',
                   style: GoogleFonts.lobsterTwo(
