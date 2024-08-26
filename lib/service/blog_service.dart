@@ -60,8 +60,6 @@ class BlogService {
     }
   }
 
-
-
   Future<Blog> createBlog(String title, String description) async {
     final token = await authService.getToken();
     if (token == null) {

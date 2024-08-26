@@ -4,7 +4,7 @@ const BlogSchema = new mongoose.Schema({
     title: {
         type: String,
         required: [true, "Title must not be empty"],
-        maxlength: [20, "Title must not exceed 20 chars"],
+        maxlength: [200, "Title must not exceed 200 chars"],
         trim: true,
     },
     description: {

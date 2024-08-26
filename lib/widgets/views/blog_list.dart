@@ -129,7 +129,7 @@ class _BlogListState extends State<BlogList> {
                         blogProvider.blogs[i].description,
                         style: GoogleFonts.openSans(
                           fontSize: 16,
-                          color: const Color(0xFF144058),
+                          color: const Color(0xFFDD671E),
                         ),
                       ),
                     ],
