@@ -1,4 +1,4 @@
-### Loot
+##### Loot
 
 This project is a **Blog Application** built using **Flutter** as a front-end amd **noedejs(express)** as backend. It allows users to read, save, and manage blog posts. The application features a modern UI with a bottom navigation bar and a floating action button for adding new blog posts. The app is designed to be responsive and user-friendly, providing a seamless experience across different devices.
 
