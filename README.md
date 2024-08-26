@@ -34,7 +34,7 @@ This project is a **Blog Application** built using **Flutter** as a front-end am
    ```sh
    git clone https://github.com/MahmoudShawky1612/Blogs.git
    ```
-2. **Navigate to the project directory**:
+2. **Navigate to the project root directory**:
    ```sh
    cd blog
    ```
@@ -49,7 +49,7 @@ This project is a **Blog Application** built using **Flutter** as a front-end am
 
    ### Installation For NodeJs
 
-2. **Navigate to the project directory**:
+2. **Navigate to the project root directory**:
    ```sh
    cd blog
    ```
